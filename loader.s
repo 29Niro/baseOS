@@ -22,7 +22,7 @@
         mov esp, kernel_stack + KERNEL_STACK_SIZE   ; point esp to the start of the
                                                     ; stack (end of memory area)
         ; The assembly code
-        external sum_of_three   ; the function sum_of_three is defined elsewhere
+        extern sum_of_three   ; the function sum_of_three is defined elsewhere
 
         push dword 3            ; arg3
         push dword 2            ; arg2
