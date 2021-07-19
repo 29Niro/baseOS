@@ -20,7 +20,14 @@
     loader:                         ; the loader label (defined as entry point in linker script)
         mov eax, 0xCAFEBABE         ; place the number 0xCAFEBABE in the register eax
         mov esp, kernel_stack + KERNEL_STACK_SIZE   ; point esp to the start of the
-                                                ; stack (end of memory area)
+                                                    ; stack (end of memory area)
+        ; The assembly code
+        external sum_of_three   ; the function sum_of_three is defined elsewhere
+
+        push dword 3            ; arg3
+        push dword 2            ; arg2
+        push dword 1            ; arg1
+        call sum_of_three       ; call the function, the result will be in eax
 
     .loop:
         jmp .loop                   ; loop forever
