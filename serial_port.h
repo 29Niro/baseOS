@@ -4,7 +4,7 @@
 
 #include "io.h" /* io.h is implement in the section "Moving the cursor" */
 
-/* The I/O ports */
+/* The I/O port    com1: enabled=1, mode=file, dev=com1.outs */
 /* All the I/O ports are calculated relative to the data port. This is because
 * all serial ports (COM1, COM2, COM3, COM4) have their ports in the same
 * order, but they start at different values.
