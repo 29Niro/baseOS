@@ -9,5 +9,5 @@
 
     void run(){
         char c[] = "Welcome";
-        write(c, 8);
+        write(c, 9);
     }
