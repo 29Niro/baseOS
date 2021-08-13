@@ -9,6 +9,8 @@
     }
 
     void run(){
+	init();
+
         char c[] = "Welcome";
         write(c, 9);
 
