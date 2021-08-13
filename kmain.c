@@ -1,11 +1,11 @@
 #include "io.h"
 #include "fb.h"
 #include "serial_port.h"
+#include "gdt.h"
 
-    /* The C function */
-    int sum_of_three(int arg1, int arg2, int arg3)
+    void init()
     {
-        return arg1 + arg2 + arg3;
+        init_gdt();
     }
 
     void run(){
