@@ -2,10 +2,14 @@
 #include "fb.h"
 #include "serial_port.h"
 #include "gdt.h"
+#include "interrupt/interrupts.c"
+
+
 
     void init()
     {
         init_gdt();
+	interrupts_install_idt();
     }
 
     void run(){
