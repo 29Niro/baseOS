@@ -2,10 +2,9 @@
 #include "fb.h"
 #include "serial_port.h"
 #include "gdt.h"
-#include "interrupts/interrupts.c"
+#include "interrupt/interrupts.c"
 
-#define POSITION 0
-#define PORT 0x3F8
+
 
     void init()
     {
