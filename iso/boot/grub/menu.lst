@@ -3,3 +3,4 @@
 
     title baseOS
     kernel /boot/kernel.elf
+    module /modules/program
