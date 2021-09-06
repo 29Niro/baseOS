@@ -2,14 +2,18 @@
 #include "fb.h"
 #include "serial_port.h"
 #include "gdt.h"
-#include "interrupt/interrupts.c"
+#include "interrupt/interrupts.h"
 #include "multiboot.h"
+#include "interrupt/keyboard.h"
+#include "page/paging.h"
+#include "memory/memory_segments.h"
 
 
     void init()
     {
-        init_gdt();
+	segments_install_gdt();
 	interrupts_install_idt();
+   	init_paging();
     }
 
     void run(unsigned int ebx){
@@ -37,4 +41,11 @@
         write(errorMsg, err_len);
         serial_write(SERIAL_COM1_BASE, errorMsg, err_len);
     	}
+
+	/*segments_install_gdt();
+	interrupts_install_idt();
+	init_paging();*/
+	// test page fault 	
+	//unsigned int *ptr = (unsigned int*)0xA0000000;
+   	//unsigned int do_page_fault = *ptr;
     }

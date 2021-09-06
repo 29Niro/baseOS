@@ -1,7 +1,7 @@
-OBJECTS = loader.o kmain.o io.o gdt_asm.o idt.o interrupt_handler.o
+OBJECTS = loader.o kmain.o io.o gdt_asm.o idt.o interrupt_handler.o interrupt/interrupts.o interrupt/keyboard.o interrupt/pic.o interrupt/isr.o memory/memory_segments.o paging_enable.o common/common.o page/paging.o heap/kheap.o
 CC = gcc
-CFLAGS = -m32 -nostdlib -nostdinc -fno-builtin -fno-stack-protector \
-         -nostartfiles -nodefaultlibs -Wall -Wextra -Werror -c
+CFLAGS = -m32 -nostdlib -fno-builtin -fno-stack-protector \
+         -Wno-unused -nostartfiles -nodefaultlibs -Wall -Wextra -Werror -c -masm=intel
 LDFLAGS = -T link.ld -m elf_i386
 AS = nasm
 ASFLAGS = -f elf
