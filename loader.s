@@ -21,7 +21,8 @@
         mov eax, 0xCAFEBABE         ; place the number 0xCAFEBABE in the register eax
         mov esp, kernel_stack + KERNEL_STACK_SIZE   ; point esp to the start of the
                                                     ; stack (end of memory area)
-        
+
+	add esp, 4        
 	push ebx
 
         ; Calling C code

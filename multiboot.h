@@ -96,7 +96,7 @@ typedef unsigned short          multiboot_uint16_t;
 typedef unsigned int            multiboot_uint32_t;
 typedef unsigned long long      multiboot_uint64_t;
 
-struct multiboot_header
+typedef struct multiboot_header
 {
   /* Must be MULTIBOOT_MAGIC - see above. */
   multiboot_uint32_t magic;
@@ -119,7 +119,7 @@ struct multiboot_header
   multiboot_uint32_t width;
   multiboot_uint32_t height;
   multiboot_uint32_t depth;
-};
+}multiboot_header_t;
 
 /* The symbol table for a.out. */
 struct multiboot_aout_symbol_table
@@ -141,7 +141,7 @@ struct multiboot_elf_section_header_table
 };
 typedef struct multiboot_elf_section_header_table multiboot_elf_section_header_table_t;
 
-struct multiboot_info
+typedef struct multiboot_info
 {
   /* Multiboot info version number */
   multiboot_uint32_t flags;
@@ -217,8 +217,8 @@ struct multiboot_info
       multiboot_uint8_t framebuffer_blue_mask_size;
     };
   };
-};
-typedef struct multiboot_info multiboot_info_t;
+}multiboot_info_t;
+
 
 struct multiboot_color
 {

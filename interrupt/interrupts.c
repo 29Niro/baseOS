@@ -1,13 +1,11 @@
 #include "interrupts.h"
 #include "pic.c"
 #include "../io.h"
-
 #include "../serial_port.h"
-#include "keyboard.c"
-//#include "paging.h"
+#include "keyboard.h"
+
 
 #define KEYBOARD_MAX_ASCII 83
-
 #define INTERRUPTS_DESCRIPTOR_COUNT 256 
 #define INTERRUPTS_KEYBOARD 33 
 #define INTERRUPTS_PAGING 14 
@@ -71,7 +69,7 @@ void interrupt_handler(__attribute__((unused)) struct cpu_state cpu, unsigned in
 				serial_configure_line(SERIAL_COM1_BASE);
 				char str[1];
 				str[0] = ascii;
-				serial_write(PORT, str, 1);
+				serial_write(str, 1);
 			}
 
 			pic_acknowledge(interrupt);
