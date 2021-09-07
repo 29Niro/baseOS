@@ -1,6 +1,6 @@
 #include <stdint.h>
 #include "string.h"
-#include "../memory/memory_segments.h"
+#include "../memory/segments.h"
 #include "../log.h"
 
 extern uint32_t kernel_end; // defined in link.ld
