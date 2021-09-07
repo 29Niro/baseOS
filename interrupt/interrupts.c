@@ -1,5 +1,5 @@
 #include "interrupts.h"
-#include "pic.c"
+//#include "pic.c"
 #include "../io.h"
 #include "../serial_port.h"
 #include "keyboard.h"
@@ -47,7 +47,7 @@ void interrupts_install_idt()
 	load_idt((int) &idt);
 
 	/*pic_remap(PIC_PIC1_OFFSET, PIC_PIC2_OFFSET);*/
-	pic_remap(PIC_1_OFFSET, PIC_2_OFFSET);
+	//pic_remap(PIC_1_OFFSET, PIC_2_OFFSET);
 }
 
 
@@ -69,10 +69,10 @@ void interrupt_handler(__attribute__((unused)) struct cpu_state cpu, unsigned in
 				serial_configure_line(SERIAL_COM1_BASE);
 				char str[1];
 				str[0] = ascii;
-				serial_write(str, 1);
+				serial_write(SERIAL_COM1_BASE, str,sizeof(str));
 			}
 
-			pic_acknowledge(interrupt);
+			//pic_acknowledge(interrupt);
 
 			break;
 		

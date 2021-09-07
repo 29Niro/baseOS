@@ -1,12 +1,9 @@
-#include "io.h"
-#include "fb.h"
+//#include "fb.h"
 #include "serial_port.h"
-#include "gdt.h"
 #include "interrupt/interrupts.h"
 #include "multiboot.h"
-#include "interrupt/keyboard.h"
 #include "page/paging.h"
-#include "memory/memory_segments.h"
+#include "memory/segments.h"
 
 
     void init()
@@ -25,7 +22,7 @@
 
 	if(mbinfo->mods_count == 1){
 		 char c[] = "Welcome";
-       		 write(c, 9);
+       		 //write(c, 9);
 
         	serial_write(SERIAL_COM1_BASE, c, 7);
 
@@ -38,7 +35,7 @@
 	else{
         char errorMsg[] = "Error: Number of modules loaded is not equal to 1.\n";
         unsigned int err_len = sizeof(errorMsg) / sizeof(errorMsg[0]);
-        write(errorMsg, err_len);
+        //write(errorMsg, err_len);
         serial_write(SERIAL_COM1_BASE, errorMsg, err_len);
     	}
 
