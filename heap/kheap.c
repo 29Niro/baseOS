@@ -1,22 +1,38 @@
-#include <stdint.h>
-#include "string.h"
-#include "../memory/segments.h"
-#include "../log.h"
+#include "kheap.h"
 
-extern uint32_t kernel_end; // defined in link.ld
-uint32_t next_free = (uint32_t)&kernel_end;
+u32int g_KerNelPhysicalAddressStart = 0;
+u32int g_CurrentPhysicalAddressTop = 0;
 
-void *kmalloc(size_t size) {
-  void *mem =  (void*)next_free;
-  next_free += size;
-  return mem;
+void set_physical_address(u32int kerNelPhysicalStart,
+                          u32int kernelPhysicalEnd) {
+  g_KerNelPhysicalAddressStart = kerNelPhysicalStart;
+  g_CurrentPhysicalAddressTop = kernelPhysicalEnd;
 }
 
-void *kmalloc_page() {
-  if (next_free & 0xfffff000) { // not aligned
-    next_free &= 0xfffff000; // align it
-    next_free += 0x1000; // advance to unallocated memory
+u32int kmalloc_int(u32int size, u32int align, u32int *pAddrPtr) {
+  if (align == 1) {
+    if (g_CurrentPhysicalAddressTop & 0x00000FFF) {
+      // Align the placement address;
+      g_CurrentPhysicalAddressTop &= 0xFFFFF000;
+      g_CurrentPhysicalAddressTop += 0x1000;
+    }
   }
-  debug("allocated page at %x", next_free);
-  return kmalloc(0x1000);
+  if (pAddrPtr) {
+    *pAddrPtr = g_CurrentPhysicalAddressTop;
+  }
+  u32int tmp = g_CurrentPhysicalAddressTop;
+  g_CurrentPhysicalAddressTop += size;
+  return tmp;
 }
+
+u32int kmalloc_a(u32int size) { return kmalloc_int(size, 1, 0); }
+
+u32int kmalloc_p(u32int size, u32int *pAddrPtr) {
+  return kmalloc_int(size, 0, pAddrPtr);
+}
+
+u32int kmalloc_ap(u32int size, u32int *pAddrPtr) {
+  return kmalloc_int(size, 1, pAddrPtr);
+}
+
+u32int kmalloc(u32int size) { return kmalloc_int(size, 0, 0); }
