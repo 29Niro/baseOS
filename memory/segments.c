@@ -1,7 +1,5 @@
 #include "segments.h"
 
-#include "stdlib.h"
-
 #define SEGMENT_DESCRIPTOR_COUNT 3
 #define SEGMENT_BASE 0
 #define SEGMENT_LIMIT 0xFFFFF
