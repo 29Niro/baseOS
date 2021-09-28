@@ -3,6 +3,7 @@
 #include "multiboot.h"
 #include "page/paging.h"
 #include "memory/segments.h"
+#include "user_modes/user_mode.h"
 
 
     void init(u32int kernelPhysicalStart, u32int kernelPhysicalEnd)
@@ -24,6 +25,13 @@
        		 //write(c, 9);
 
         	serial_write(SERIAL_COM1_BASE, c, 7);
+
+		//switch to user mode
+        	char Str[] = "Switching to user mode\n";
+        	unsigned int Len = sizeof(Str) / sizeof(Str[0]);
+        	serial_write(SERIAL_COM1_BASE, Str, Len);
+        	// Switch to User mode
+   		switch_to_user_mode();
 
 		typedef void (*call_module_t)(void);
         	/* ... */
